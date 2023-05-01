@@ -18,7 +18,7 @@ def filter_datum(
         # pattern = rf'({field}=)[*+]{separator}'
         pattern = rf'(?<={field}=).*?(?={separator})'
         message = re.sub(pattern, redaction, message)
-        print(field)
+        # print(field)
 
     return message
 
