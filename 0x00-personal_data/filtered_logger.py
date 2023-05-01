@@ -70,9 +70,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
     # Connect to database
     conn = mysql.connector.connect(
-        user=user
-        password=password
-        host=host
+        user=user,
+        password=password,
+        host=host,
         database=db_name
     )
     return (conn)
