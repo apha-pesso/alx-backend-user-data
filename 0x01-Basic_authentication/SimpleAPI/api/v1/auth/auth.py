@@ -4,8 +4,10 @@
 from flask import request
 from typing import List, TypeVar
 
+
 class Auth():
     '''Auth class'''
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         '''require auth'''
         if path is None:
@@ -17,7 +19,7 @@ class Auth():
                 return False
         return True
         # if not path or excluded_paths is None:
-            # return True
+        # return True
 
     '''
         for p in excluded_paths:
@@ -43,6 +45,6 @@ class Auth():
         return request.headers['Authorization']
 
     def current_user(self, request=None) -> TypeVar('User'):
-    # def current_user(self, request=None):
+        # def current_user(self, request=None):
         '''Current user'''
         return None
