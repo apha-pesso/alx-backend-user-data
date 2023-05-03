@@ -34,7 +34,8 @@ def before_request_func():
     '''Before request method'''
     if auth:
         path = request.path
-        if not auth.require_auth(path, excluded_paths):
+        print(path)
+        if auth.require_auth(path, excluded_paths):
             if auth.authorization_header(request) is None:
                 abort(401)
             if auth.current_user(request) is None:
