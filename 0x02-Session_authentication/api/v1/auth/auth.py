@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''Auth class'''
 
+from os import getenv
 from flask import request
 from typing import List, TypeVar
 
@@ -47,3 +48,11 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         '''Current user'''
         return None
+
+    def session_cookie(self, request=None):
+        '''Cookie session'''
+        if not request:
+            return None
+
+        session_id = getenv("SESSION_NAME")
+        return request.cookies.get(session_id)
