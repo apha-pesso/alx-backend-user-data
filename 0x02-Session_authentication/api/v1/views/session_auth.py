@@ -3,7 +3,7 @@
 """
 
 from api.v1.views import app_views
-from flask import abort, jsonify, request
+from flask import abort, jsonify, request, make_response
 from os import getenv
 from models.user import User
 
@@ -38,12 +38,16 @@ def session_authy() -> str:
     # Import Auth class
     from api.v1.app import auth
 
-    user_id = user_obj[0].id
+    user_id = user_obj.id
 
     # Create new session id
     session_id = auth.create_session(user_id)
 
+    # object to json
+    user_json = user_obj.to_json()
+
     # set cookie in response
+    response = make_response(user_json)
     session_cookie = getenv('SESSION_NAME')
     response.set_cookie(session_cookie, session_id)
-    return user_obj.to_json()
+    return response
