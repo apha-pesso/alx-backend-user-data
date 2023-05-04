@@ -3,8 +3,8 @@
 
 from api.v1.auth.auth import Auth
 from uuid import uuid4
-# from models.user import User
-# from typing import TypeVar
+from models.user import User
+from typing import TypeVar
 
 
 class SessionAuth(Auth):
@@ -32,3 +32,15 @@ class SessionAuth(Auth):
 
         user_id = self.user_id_by_session_id.get(session_id)
         return user_id
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        '''Return user object based on cookie'''
+        # Get session ID
+        session_id = self.session_cookie(request)
+
+        # Get user_id with session_id
+        user_id = self.user_id_for_session_id(session_id)
+
+        # Retrieve User object with the user_id
+        user = User.get(user_id)
+        return user
