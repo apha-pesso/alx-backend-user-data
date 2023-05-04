@@ -26,7 +26,7 @@ def session_authy() -> str:
 
     # Retrieve user object with email from post request
     try:
-        user = User.search({'email': user_email})
+        user = User.search({'email': email})
     except Exception:
         return jsonify({"error": "no user found for this email"}), 404
 
