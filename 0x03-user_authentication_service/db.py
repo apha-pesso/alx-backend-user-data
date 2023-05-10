@@ -6,7 +6,6 @@ from sqlalchemy.exc import InvalidRequestError, NoResultFound
 # from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-
 from user import Base, User
 
 
@@ -33,18 +32,16 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         '''Add user to database'''
-
-        try:
-            user = User(email=email, hashed_password=hashed_password)
+        user = User(email=email, hashed_password=hashed_password)
         # self.__session.add(user)
 
-            # session = DB._session
+        # session = DB._session
 
         # DB.__session.add(user)
-            self._session.add(user)
-            self._session.commit()
-        except Exception:
-            return None
+        self._session.add(user)
+        self._session.commit()
+        # except Exception:
+        # return None
 
         return user
 
