@@ -53,7 +53,7 @@ class DB:
         # except NoResultFound:
         # raise NoResultFound()
         # except InvalidRequestError:
-            # raise InvalidRequestError
+        # raise InvalidRequestError
         if not user:
             raise NoResultFound()
         return user
