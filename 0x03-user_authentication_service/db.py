@@ -34,11 +34,6 @@ class DB:
         """Add user to database
         """
         user = User(email=email, hashed_password=hashed_password)
-        # self.__session.add(user)
-
-        # session = DB._session
-
-        # DB.__session.add(user)
         self._session.add(user)
         self._session.commit()
         return user
