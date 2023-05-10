@@ -2,14 +2,13 @@
 """DB module
 """
 from sqlalchemy import create_engine
+# from sqlalchemy.exc import InvalidRequestError, NoResultFound
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from user import User
-from user import Base
-from typing import Optional
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
+from user import Base, User
 
 
 class DB:
@@ -34,27 +33,17 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Creating add_user method
-            Args: user_email, user_password
-            return: User_id
+        """Add user to database
         """
-        new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
         self._session.commit()
-        return new_user
+        return user
 
     def find_user_by(self, **kwargs) -> User:
         """
-            by email and password
-            Retrieve a user by their email address.
-
-         Args:
-            email (str): Email address of the user to retrieve.
-            session (Session): SQLAlchemy session to use for the query.
-
-        Returns:
-            User: The retrieved user object.
-        Kwargs: email, hashed_password
+        Find user by keyword argument
+        return user
         """
         if not kwargs:
             raise InvalidRequestError
@@ -64,19 +53,15 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """Updating User by id
-            raises ValueError:
-            to atleast one Field must be provided for update
-        Args: user_id, kwargs
         """
-        try:
-            user = self.find_user_by(id=user_id)
-            for key, value in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-                else:
-                    raise ValueError
-            self._session.commit()
-        except NoResultFound:
-            raise ValueError
+        Update User
+        return none
+        """
+        user = self.find_user_by(id=user_id)
+
+        for key, value in kwargs.items():
+            if not hasattr(user, key):
+                raise ValueError
+            setattr(user, key, value)
+        self._session.commit()
         return None
