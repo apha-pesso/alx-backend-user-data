@@ -24,6 +24,7 @@ class Auth:
 
     def register_user(self, email: str, password: str) -> User:
         '''Register User class'''
+        '''
         try:
             user = self._db.find_user_by(email=email)
             if user:
@@ -32,6 +33,18 @@ class Auth:
             hashed_password = _hash_password(password)
             new_user = self._db.add_user(email, hashed_password)
             return new_user
+        '''
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                raise ValueError('User {} already exists'.format(email))
+        except NoResultFound:
+            # hashed the password
+
+            hashed_password = _hash_password(password)
+            new_user = self._db.add_user(email, hashed_password)
+            return new_user
+
         # user = User(email=email, hashed_password=hashed_password)
         # self._db._session.add(user)
         # self._db._session.commit()
