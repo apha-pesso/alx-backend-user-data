@@ -51,7 +51,7 @@ class DB:
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
         except NoResultFound:
-            return None
+            raise NoResultFound
         # if user is None:
             # raise NoResultFound
         return user
