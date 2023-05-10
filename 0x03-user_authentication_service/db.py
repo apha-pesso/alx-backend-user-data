@@ -43,7 +43,7 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
-        Find user by keyword argument
+        '''Find user by keyword argument'''
         if not kwargs:
             raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
@@ -52,7 +52,7 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        Update User
+        '''Update User'''
         user = self.find_user_by(id=user_id)
 
         for key, value in kwargs.items():
