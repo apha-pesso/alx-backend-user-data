@@ -3,7 +3,7 @@
 """
 from sqlalchemy import create_engine
 from sqlalchemy.exc import InvalidRequestError, NoResultFound
-# from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
@@ -42,7 +42,6 @@ class DB:
         self._session.commit()
         return user
 
-    '''
     def find_user_by(self, **kwargs) -> User:
         Find user by keyword argument
         if not kwargs:
@@ -62,4 +61,3 @@ class DB:
             setattr(user, key, value)
         self._session.commit()
         return None
-    '''
