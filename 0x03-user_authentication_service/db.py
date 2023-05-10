@@ -16,7 +16,7 @@ class DB:
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=False)
+        self._engine = create_engine("sqlite:///a.db")
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -40,9 +40,6 @@ class DB:
         # DB.__session.add(user)
         self._session.add(user)
         self._session.commit()
-        # except Exception:
-        # return None
-
         return user
 
     def find_user_by(self, **kwargs) -> User:
