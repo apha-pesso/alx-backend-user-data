@@ -45,17 +45,17 @@ class DB:
         Find user by keyword argument
         return user
         """
-        # if not kwargs:
-        # raise InvalidRequestError
-
-        try:
-            user = self._session.query(User).filter_by(**kwargs).first()
-        except NoResultFound:
-            raise NoResultFound
-        except InvalidRequestError:
+        if not kwargs:
             raise InvalidRequestError
-        if user is None:
-            raise NoResultFound
+
+        # try:
+        user = self._session.query(User).filter_by(**kwargs).first()
+        # except NoResultFound:
+        # raise NoResultFound()
+        # except InvalidRequestError:
+            # raise InvalidRequestError
+        if not user:
+            raise NoResultFound()
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
