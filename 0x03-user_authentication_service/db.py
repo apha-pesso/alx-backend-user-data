@@ -31,7 +31,8 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        '''Add user to database'''
+        """Add user to database
+        """
         user = User(email=email, hashed_password=hashed_password)
         # self.__session.add(user)
 
@@ -43,7 +44,10 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
-        '''Find user by keyword argument'''
+        """
+        Find user by keyword argument
+        return user
+        """
         if not kwargs:
             raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
@@ -52,7 +56,10 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        '''Update User'''
+        """
+        Update User
+        return none
+        """
         user = self.find_user_by(id=user_id)
 
         for key, value in kwargs.items():
